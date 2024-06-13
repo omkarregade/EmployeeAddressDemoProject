@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>
+        </Console>
+
+        <File name="SpecificLog" fileName="C:/Users/Omkar Regade/Desktop/Study/SpringBoot/Employee/src/main/resources/log/Mygeneral.log" append="true">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"/>
+        </File>
+
+        <File name="ErrorLog" fileName="C:/Users/Omkar Regade/Desktop/Study/SpringBoot/Employee/src/main/resources/log/error.log" append="true">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>
+            <Filters>
+                <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+        </File>
+    </Appenders>
+
+    <Loggers>
+        <!-- Root logger -->
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="SpecificLog"/>
+            <AppenderRef ref="ErrorLog"/>
+        </Root>
+
+        <!-- Logger -->
+        <Logger name="com.example" level="debug" additivity="false">
+            <AppenderRef ref="SpecificLog"/>
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="ErrorLog"/>
+        </Logger>
+
+        <!-- Logger for error messages only -->
+        <Logger name="ErrorLogger" level="error" additivity="false">
+            <AppenderRef ref="ErrorLog"/>
+        </Logger>
+    </Loggers>
+</Configuration>

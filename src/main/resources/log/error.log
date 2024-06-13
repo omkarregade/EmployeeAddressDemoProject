@@ -1,0 +1,31 @@
+2024-06-12 18:59:16 ERROR EmployeeServiceImp:81 - Employee is not found into database of id :3d8c7088-68d0-43a6-af3b
+2024-06-12 18:59:49 ERROR GlobleExcpetionHandler:59 - {mobileNumber=Mobile number is mandatory, name=Name is mandatory, dateOfBirth=Date of birth cannot be null, designation=Designation is mandatory}
+2024-06-13 11:29:29 ERROR EmployeeServiceImp:77 - An error occurred while getting employee into employee with id 3d8c7088-68d0-43a6-af3b: Employee with id 3d8c7088-68d0-43a6-af3b is Not Found 
+2024-06-13 12:05:10 ERROR EmployeeServiceImp:41 - validation error fieldName : name Message : Name is mandatory
+2024-06-13 12:05:10 ERROR EmployeeServiceImp:41 - validation error fieldName : mobileNumber Message : Mobile number is mandatory
+2024-06-13 12:05:10 ERROR EmployeeServiceImp:41 - validation error fieldName : designation Message : Designation is mandatory
+2024-06-13 12:05:10 ERROR EmployeeServiceImp:41 - validation error fieldName : dateOfBirth Message : Date of birth cannot be null
+2024-06-13 12:41:03 ERROR EmployeeServiceImp:50 - No static resource employee/phone-number/e9f69878-6403-4bc5-afcf-a8c63ffcdcbd/8996633548.
+2024-06-13 12:42:15 ERROR EmployeeServiceImp:50 - No static resource employee/phone-number/e9f69878-6403-4bc5-afcf-a8c63ffcdcbd/8996633548.
+2024-06-13 12:43:27 ERROR EmployeeServiceImp:50 - No static resource employee/phone-number/3d8c7088-68d0-43a6-af3b-3f01ad0c5552/8996633548.
+2024-06-13 15:17:30 ERROR EmployeeServiceImp:138 - designation
+2024-06-13 15:17:30 ERROR EmployeeServiceImp:30 - Invalid designation provided: df
+2024-06-13 15:17:49 ERROR EmployeeServiceImp:50 - No static resource employee/designation/eb080adc-f0f0-4168-9e3d-af16f12a6946.
+2024-06-13 15:17:59 ERROR EmployeeServiceImp:138 - designation
+2024-06-13 15:17:59 ERROR EmployeeServiceImp:30 - Invalid designation provided: Software
+2024-06-13 15:18:07 ERROR EmployeeServiceImp:138 - designation
+2024-06-13 15:18:07 ERROR EmployeeServiceImp:30 - Invalid designation provided: Software Enginner
+2024-06-13 15:19:07 ERROR EmployeeServiceImp:138 - designation
+2024-06-13 15:19:07 ERROR EmployeeServiceImp:30 - Invalid designation provided:           
+2024-06-13 15:19:13 ERROR EmployeeServiceImp:138 - designation
+2024-06-13 15:19:13 ERROR EmployeeServiceImp:30 - Invalid designation provided:           
+2024-06-13 15:19:51 ERROR EmployeeServiceImp:138 - designation
+2024-06-13 15:19:51 ERROR EmployeeServiceImp:30 - Invalid designation provided: 454
+2024-06-13 15:21:04 ERROR EmployeeServiceImp:138 - designation
+2024-06-13 15:21:04 ERROR EmployeeServiceImp:30 - Invalid designation provided:                     
+2024-06-13 15:36:52 ERROR EmployeeServiceImp:50 - No static resource employee/designation/eb080adc-f0f0-41686.
+2024-06-13 15:37:24 ERROR EmployeeServiceImp:50 - No static resource employe.
+2024-06-13 15:49:23 ERROR EmployeeServiceImp:42 - validation error fieldName : name Message : Name is mandatory
+2024-06-13 15:49:23 ERROR EmployeeServiceImp:42 - validation error fieldName : dateOfBirth Message : Date of birth cannot be null
+2024-06-13 15:49:23 ERROR EmployeeServiceImp:42 - validation error fieldName : designation Message : Designation is mandatory
+2024-06-13 15:49:23 ERROR EmployeeServiceImp:42 - validation error fieldName : mobileNumber Message : Mobile number is mandatory
