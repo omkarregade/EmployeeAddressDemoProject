@@ -26,8 +26,14 @@ public class Employee {
         @Column(name = "Date_Of_Birth")
         private LocalDate dateOfBirth;
 
-        @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+   /*     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
         //@JsonManagedReference
-        private List<Address> addresses = new ArrayList<>();
+        private List<Address> addresses = new ArrayList<>();*/
+
+
+        @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+        @JoinColumn(name = "employee_id")
+        @JsonManagedReference
+        private List<Address> addresses;
 
 }

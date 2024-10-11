@@ -26,7 +26,7 @@
         </Root>
 
         <!-- Logger -->
-        <Logger name="com.example" level="debug" additivity="false">
+        <Logger name="com.employee" level="debug" additivity="false">
             <AppenderRef ref="SpecificLog"/>
             <AppenderRef ref="Console"/>
             <AppenderRef ref="ErrorLog"/>

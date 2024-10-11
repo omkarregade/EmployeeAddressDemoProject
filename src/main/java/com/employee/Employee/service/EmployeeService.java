@@ -1,20 +1,17 @@
 package com.employee.Employee.service;
 
-import com.employee.Employee.dto.EmployeeDto;
+import com.employee.Employee.dto.AddressDTO;
+import com.employee.Employee.dto.EmployeeDTO;
 
 import java.util.List;
 
 public interface EmployeeService {
-    EmployeeDto createEmployee(EmployeeDto employeeDto);
-    List<EmployeeDto> getAllEmployee();
-    EmployeeDto getEmployeeById(String employeeId);
-    EmployeeDto updateEmployee(String employeeId,EmployeeDto employeeDto);
-    String deleteEmployee(String employeeId);
+    EmployeeDTO createEmployee(EmployeeDTO employeeDto);
+    List<EmployeeDTO> getEmployees(String employeeId, String designation);
+    EmployeeDTO updateEmployee(String employeeId, EmployeeDTO employeeDto);
 
-    List<EmployeeDto> getEmployeeByDesignation(String designation);
-    String deleteEmployeeByMobileNumber(String mobileNumber);
-    String deleteEmployeeByDesignation(String designation);
-    EmployeeDto updateEmployeeName(String employeeId, String name);
-    EmployeeDto updateEmployeeDesignation(String employeeId, String designation);
-    EmployeeDto updateEmployeeMobileNumber(String employeeId, String mobileNumber);
+    public String deleteEmployee(String employeeId, String mobileNumber);
+
+    EmployeeDTO updateEmployee(String employeeId, String name, String designation, String mobileNumber);
+    EmployeeDTO addAddressToEmployee(String employeeId, List<AddressDTO> addressDTOS);
 }

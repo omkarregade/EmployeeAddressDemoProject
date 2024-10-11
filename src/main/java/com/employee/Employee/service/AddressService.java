@@ -1,26 +1,17 @@
 package com.employee.Employee.service;
 
-import com.employee.Employee.dto.AddressDto;
-import com.employee.Employee.dto.EmployeeDto;
+import com.employee.Employee.dto.AddressDTO;
+import com.employee.Employee.dto.EmployeeDTO;
 
 import java.util.List;
 
 public interface AddressService {
-    AddressDto createAddress(AddressDto addressDTO);
-    AddressDto getAddressById(String addressId);
-    List<AddressDto> getAllAddresses();
-    AddressDto updateAddress(String addressId, AddressDto addressDTO);
+    AddressDTO createAddress(AddressDTO addressDTO);
+    List<AddressDTO> getAddress(String addressId);
+    AddressDTO updateAddress(String addressId, AddressDTO addressDTO);
     String deleteAddress(String addressId);
 
     //custom :
-    EmployeeDto addAddressToEmployee(String employeeId, List<AddressDto> addressDtos);
-    AddressDto addEmployeeToAddress(String addressId, EmployeeDto employeeDto);
+    public AddressDTO updateAddress(String addressId, String state, String country, String pinCode, String city);
 
-    AddressDto updateAddressByPinCode(String addressId, String pinCode);
-    AddressDto updateAddressByCountry(String addressId, String country);
-    AddressDto updateAddressByState(String addressId, String state);
-    AddressDto updateAddressByCity(String addressId, String city);
-
-    String deleteAddressByState(String state);
-    String deleteAddressByCity(String city);
 }

@@ -5,7 +5,7 @@ import lombok.*;
 import jakarta.validation.constraints.*;
 
 @Data
-public class AddressDto {
+public class AddressDTO {
 
     private String addressId;
 
@@ -26,6 +26,5 @@ public class AddressDto {
     private String pinCode;
 
     //@NotNull(message = "Employee cannot be null")
-    private String employeeId;
+   // private String employeeId;
 }
-

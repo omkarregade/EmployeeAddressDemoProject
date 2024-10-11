@@ -1,7 +1,7 @@
 package com.employee.Employee.exception;
 
 import com.employee.Employee.response.Response;
-import com.employee.Employee.service.EmployeeServiceImp;
+import com.employee.Employee.serviceimplemention.EmployeeServiceImp;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -11,6 +11,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -55,5 +56,10 @@ public class GlobleExceptionHandler {
     public ResponseEntity<Response> httpMessageNotReadableExceptionHandler(HttpMessageNotReadableException httpMessageNotReadableException){
         Response response = new Response(httpMessageNotReadableException.getMessage(),HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(NotSaveException.class)
+    public ResponseEntity<Response> notSaveExceptionHandler(NotSaveException exception){
+        Response response = new Response(exception.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(response,HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

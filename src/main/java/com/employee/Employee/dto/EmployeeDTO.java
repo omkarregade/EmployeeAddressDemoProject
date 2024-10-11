@@ -3,13 +3,12 @@ package com.employee.Employee.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import jakarta.validation.constraints.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Data
-public class EmployeeDto {
+public class EmployeeDTO {
     private String employeeId;
 
     @NotBlank(message = "Name is mandatory")
@@ -30,7 +29,9 @@ public class EmployeeDto {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
 
+
+
     //@NotNull(message = "Addresses cannot be null")
     //@Size(min = 1, message = "At least one address is required")
-    private List<AddressDto> addresses;
+    private List<AddressDTO> addresses;
 }

@@ -20,8 +20,19 @@ public class Address {
     private String country;
     private String pinCode;
 
-    @ManyToOne
-    @JoinColumn(name = "employee_id")
-    //@JsonBackReference
-    private Employee employee;
+    @Column(name = "employee_id")
+    private String employeeId;
+
 }
+
+
+
+
+
+
+
+//      @ManyToOne
+////    //@JsonBackReference
+//      private Employee employee;
+//  @JoinColumn(name = "employee_id")
+//  private String employeeId;

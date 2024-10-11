@@ -1,12 +1,13 @@
 package com.employee.Employee.controller;
 
-import com.employee.Employee.dto.AddressDto;
-import com.employee.Employee.dto.EmployeeDto;
-import com.employee.Employee.exception.*;
-import com.employee.Employee.service.AddressServiceImp;
-import com.employee.Employee.service.EmployeeServiceImp;
+import com.employee.Employee.dto.EmployeeDTO;
+import com.employee.Employee.dto.UpdateAddress;
+import com.employee.Employee.dto.UpdateEmployeeDTO;
+import com.employee.Employee.service.AddressService;
+import com.employee.Employee.serviceimplemention.AddressServiceImp;
+import com.employee.Employee.service.EmployeeService;
+import com.employee.Employee.serviceimplemention.EmployeeServiceImp;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,89 +15,56 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/employee")
+@RequestMapping("/employees")
 public class EmployeeController {
 
-   private EmployeeServiceImp employeeServiceImp;
+       private EmployeeService employeeService;
+       private AddressService addressService;
 
-   @Autowired
-   EmployeeController(EmployeeServiceImp employeeServiceImp){
-       this.employeeServiceImp = employeeServiceImp;
-   }
-
-    @Autowired
-    private AddressServiceImp addressServiceImp;
+       EmployeeController(EmployeeServiceImp employeeService, AddressServiceImp addressService){
+           this.employeeService = employeeService;
+           this.addressService = addressService;
+       }
 
     @PostMapping
-    public ResponseEntity<EmployeeDto> createEmployee(@Valid @RequestBody EmployeeDto employeeDto){
-            return ResponseEntity.ok().body(employeeServiceImp.createEmployee(employeeDto));
+    public ResponseEntity<EmployeeDTO> createEmployee(@Valid @RequestBody EmployeeDTO employeeDto){
+            return ResponseEntity.ok().body(employeeService.createEmployee(employeeDto));
     }
 
     @GetMapping
-    public ResponseEntity<List<EmployeeDto>> getAllEmployee(){
-        List<EmployeeDto> employeeDtos = employeeServiceImp.getAllEmployee();
-        return ResponseEntity.ok().body(employeeDtos);
+    public ResponseEntity<List<EmployeeDTO>> getEmployees(
+            @RequestParam(value = "designation", required = false) String designation,
+            @RequestParam(value = "employeeId", required = false) String employeeId) {
+
+        List<EmployeeDTO> employeeDTOS = employeeService.getEmployees(employeeId, designation);
+        return ResponseEntity.ok().body(employeeDTOS);
     }
 
-    @GetMapping("/{employeeId}")
-    public ResponseEntity<EmployeeDto> getEmployeeById(@PathVariable String employeeId){
-        return ResponseEntity.ok().body(employeeServiceImp.getEmployeeById(employeeId));
-    }
-
-    @GetMapping("/designation/{designation}")
-    public ResponseEntity<List<EmployeeDto>> getEmployeeByDesignation(@PathVariable  String designation){
-       List<EmployeeDto> employeeDtos = employeeServiceImp.getEmployeeByDesignation(designation);
-        return ResponseEntity.ok().body(employeeDtos);
-    }
-
-    @PutMapping("/{employeeId}")
-    public ResponseEntity<EmployeeDto> updateEmployee(@PathVariable String employeeId,@Valid @RequestBody EmployeeDto employeeDto) {
-        EmployeeDto updatedEmployee = employeeServiceImp.updateEmployee(employeeId, employeeDto);
+    @PutMapping
+    public ResponseEntity<EmployeeDTO> updateEmployee(@RequestBody @Valid UpdateEmployeeDTO employeeDTO) {
+        EmployeeDTO updatedEmployee = employeeService.updateEmployee(employeeDTO.getEmployeeId(), employeeDTO.getEmployeeDTO());
         return ResponseEntity.ok().body(updatedEmployee);
     }
 
-    //custom
-    @PutMapping("/address/{employeeId}")
-    public ResponseEntity<EmployeeDto> addAddressToEmployee(@PathVariable String employeeId,@Valid @RequestBody List<AddressDto> addressDtos){
-       EmployeeDto employeeDto = addressServiceImp.addAddressToEmployee(employeeId,addressDtos);
-       return new ResponseEntity<>(employeeDto,HttpStatus.OK);
+    @PutMapping("/addresses")
+    public ResponseEntity<EmployeeDTO> addAddressToEmployee(@RequestBody @Valid UpdateAddress updateAddress){
+        EmployeeDTO employeeDto = employeeService.addAddressToEmployee(updateAddress.getEmployeeId(), updateAddress.getAddressDTOList());
+        return new ResponseEntity<>(employeeDto,HttpStatus.OK);
     }
 
-    @PatchMapping("/name/{employeeId}/{name}")
-    public ResponseEntity<EmployeeDto> updateEmployeeName(@PathVariable String employeeId,
-                                                          @PathVariable String name) {
-
-        EmployeeDto updatedEmployee = employeeServiceImp.updateEmployeeName(employeeId, name);
+    @PatchMapping("/{employeeId}")
+    public ResponseEntity<EmployeeDTO> updateEmployee(@PathVariable String employeeId,
+                                                      @RequestParam(required = false) String name,
+                                                      @RequestParam(required = false) String designation,
+                                                      @RequestParam(required = false) String mobileNumber) {
+        EmployeeDTO updatedEmployee = employeeService.updateEmployee(employeeId, name, designation, mobileNumber);
         return ResponseEntity.ok(updatedEmployee);
     }
 
-    @PatchMapping("/designation/{employeeId}/{designation}")
-    public ResponseEntity<EmployeeDto> updateEmployeeDesignation(@PathVariable String employeeId,
-                                                                 @PathVariable String designation) {
-        EmployeeDto updatedEmployee = employeeServiceImp.updateEmployeeDesignation(employeeId, designation);
-        return ResponseEntity.ok(updatedEmployee);
-    }
-
-    @PatchMapping("/mobile-number/{employeeId}/{mobileNumber}")
-    public ResponseEntity<EmployeeDto> updateEmployeeMobileNumber(@PathVariable String employeeId,
-                                                                  @PathVariable String mobileNumber) {
-        EmployeeDto updatedEmployee = employeeServiceImp.updateEmployeeMobileNumber(employeeId, mobileNumber);
-        return ResponseEntity.ok(updatedEmployee);
-    }
-
-    @DeleteMapping("/{employeeId}")
-    public ResponseEntity<String> deleteEmployeeById(@PathVariable String employeeId){
-        return new ResponseEntity<>(employeeServiceImp.deleteEmployee(employeeId),HttpStatus.OK);
-    }
-
-    @DeleteMapping("/number/{mobileNumber}")
-    public ResponseEntity<String> deleteEmployeeByMobileNumber(@PathVariable String mobileNumber) {
-        return new ResponseEntity<>(employeeServiceImp.deleteEmployeeByMobileNumber(mobileNumber), HttpStatus.OK);
-    }
-
-    @DeleteMapping("/designation/{designation}")
-    public ResponseEntity<String> deleteEmployeeByDesignation(@PathVariable String designation) {
-        return new ResponseEntity<>(employeeServiceImp.deleteEmployeeByDesignation(designation), HttpStatus.OK);
-    }
+@DeleteMapping
+public String deleteEmployeeById(@RequestParam(required = false) String employeeId,
+                                 @RequestParam(required = false) String mobileNumber) {
+        return employeeService.deleteEmployee(employeeId, mobileNumber);
+}
 
 }
